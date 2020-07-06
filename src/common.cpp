@@ -1,6 +1,8 @@
 #include "common.h"
 
 #include <sstream>
+#include <iostream>
+#include <filesystem>
 
 std::string trimEdges(std::string str) {
     bool doneFront = false, doneBack = false;
@@ -47,4 +49,35 @@ std::vector<std::string> splitRValue(std::string dataLine, char delim) {
     }
 
     return data;
+}
+
+std::vector<std::string> parseWhere(std::string whereString, char delim) {
+    std::vector<std::string> where;
+
+    std::stringstream ss(whereString);
+    std::string item;
+
+    // get the key
+    std::getline(ss, item, delim);
+    where.push_back(item);
+
+    // the delimiter will the the operator
+    where.push_back(std::string(1, delim));
+
+    // get the value
+    std::getline(ss, item, delim);
+    where.push_back(item);
+
+    return where;
+}
+
+std::vector<std::string> listFilesInDirectory(std::string directory){
+    std::vector<std::string> files;
+
+    for (const auto & entry : std::filesystem::directory_iterator(directory)){
+        std::cout << entry.path() << std::endl;
+        files.push_back(entry.path());
+    }
+
+    return files;
 }

@@ -32,6 +32,8 @@ Dataframe Dataframe::operator=(const Dataframe& dataframe){
     }
 
     _data = dataframe._data;
+
+    return *this;
 } //copy assignment
 
 Dataframe::Dataframe(Dataframe &&dataframe){
@@ -44,6 +46,8 @@ Dataframe &Dataframe::operator=(Dataframe&& dataframe){
     _data = dataframe._data;
 
     dataframe._data.clear();
+
+    return *this;
 } // move assignment
 
 std::ostream &Dataframe::operator<<(std::ostream & Str) {

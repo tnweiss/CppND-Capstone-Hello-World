@@ -11,6 +11,7 @@
 #include "common.h"
 
 Sources::Sources(std::string configFileName) {
+    // initialize vector of sources and the source to add to the vector
     _sources = std::vector<std::unique_ptr<Source>>();
     std::unique_ptr<Source> _source = nullptr;
 
@@ -18,6 +19,7 @@ Sources::Sources(std::string configFileName) {
     std::ifstream filestream(configFileName);
     if (filestream.is_open()) {
         while (std::getline(filestream, line)) {
+            // load each line and trim the whitepace on the edges
             line = trimEdges(line);
 
             // if we get three dashes this is a new definition of a source
@@ -26,11 +28,9 @@ Sources::Sources(std::string configFileName) {
                 if (_source != nullptr){
                     _sources.push_back(std::move(_source));
                 }
-
                 // start the new source def
                 _source = std::make_unique<Source>(line.substr(3));
             }
-
             // if source is defined and line is not empty string add key
             if (line.size() > 0 && _source != nullptr) {
                 _source->AddKey(line);
@@ -41,9 +41,6 @@ Sources::Sources(std::string configFileName) {
             _sources.push_back(std::move(_source));
         }
     }
-
-    std::cout << "Length of sources: " << _sources.size() << std::endl;
-    std::cout << "Number of keys in source 1: " << _sources.at(0)->GetSourceName() << std::endl;
 }
 
 int Sources::GetSourceKeyIndex(std::string sourceName, std::string keyName) {

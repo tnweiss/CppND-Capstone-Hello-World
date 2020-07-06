@@ -2,40 +2,51 @@
 #include <sstream>
 #include <cstring>
 #include <iostream>
+#include <vector>
 
 #include "common.h"
 
 Query::Query(int argc, char *argv[], Sources& sources){
-    std::cout << "hello 1" << std::endl;
+    // parse arguments and look for -s -f and -w 
     for (int i=1; i<argc - 1; i++){
+        // -s is short for SELECT, should come in the form of a comma seperated list
         if (strcmp(argv[i],"-s") == 0) {
-            std::cout << "hello 2" << std::endl;
             _select = splitRValue(argv[i+1], ',');
+        // -f is short for FROM, should come in the form of a string
         } else if (strcmp(argv[i], "-f") == 0) {
-            std::cout << "hello 3 " << argv[i+1] << std::endl;
             _from = sources.GetSource(argv[i+1]);
-            std::cout << "why " << std::endl;
+        // -w is short for WHERE, should look like KEY=VALUE
         } else if (strcmp(argv[i], "-w") == 0) {
-            std::cout << argv[i+1] << std::endl;
+            std::vector<std::string> whereTmp = parseWhere(argv[i+1], '=');
+            _where[2] = whereTmp.at(2);
+            _where[1] = whereTmp.at(1);
+            _where[0] = whereTmp.at(0);
         }
     }
 }
 
-std::shared_ptr<Dataframe> &Query::query(Dataframe dataframe){
-    std::shared_ptr<Dataframe> rdf = nullptr;
-
+std::shared_ptr<Dataframe> Query::query(Dataframe dataframe, std::shared_ptr<Dataframe> results){
+    // if we find the equal operation then evaluate
     if (strcmp(_where[1].c_str(), "=")) {
+        // get the index of the key in the dataframe
         int index = _from->GetKeyIndex(_where[0]);
+        // compare the datafram value to the value in the query
         if( strcmp(dataframe.get(index)->c_str(),_where[2].c_str()) == 0){
+            // if there is a match then get the selected data 
             std::vector<std::shared_ptr<std::string>> selectData;
+            // for each data set add a pointer to the data to the data subset
             for (std::string str : _select){
                 int selectDataIndex = _from->GetKeyIndex(str);
-                //selectData.push_back(std::make_shared<std::string>(dataframe.get(index))); 
+                selectData.push_back(dataframe.get(index)); 
             }
-            rdf = std::make_shared<Dataframe>(selectData);
+            // return the new subset of data
+            return std::shared_ptr<Dataframe>();
         }
+    // if no operator matches are found throw an error
     }else {
         std::cout << "ERROR: Operation " << _where[1] << " not supported" << std::endl;
+        exit(1);
     }
-    return rdf;
+    // return null pointer
+    return nullptr;
 }
