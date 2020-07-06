@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 #include "sources.h"
+#include "query.h"
 
 int main(int argc, char *argv[]) {
 
@@ -24,6 +25,9 @@ int main(int argc, char *argv[]) {
     std::cout << "Using config file: " << configFile << std::endl;
 
     Sources _sources(configFile);
+    std::cout << "check" << std::endl;
+    Query q(argc, argv, _sources);
+    std::cout << q;
 
     std::cout << "Source key index test: " << _sources.GetSourceKeyIndex("testSource", "testKey2") << std::endl;
 

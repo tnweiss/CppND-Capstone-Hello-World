@@ -16,6 +16,7 @@ class Dataframe {
         Dataframe &operator=(Dataframe&&); // move assignment
 
         std::ostream &operator<<(std::ostream & Str); // used to print object to console
+        std::shared_ptr<std::string> get(int);
 
     private:
         std::vector<std::shared_ptr<std::string>> _data;

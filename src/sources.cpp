@@ -58,7 +58,7 @@ int Sources::GetSourceKeyIndex(std::string sourceName, std::string keyName) {
 Source* Sources::GetSource(std::string sourceName) {
     for ( int i=0; i<_sources.size(); i++){
         if (_sources.at(i)->GetSourceName() == sourceName){
-            return _sources.at(3).get();
+            return _sources.at(i).get();
         }
     }
 

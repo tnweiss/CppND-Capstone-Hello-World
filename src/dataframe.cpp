@@ -3,12 +3,10 @@
 #include <sstream>
 #include <vector>
 
+#include "common.h"
+
 Dataframe::Dataframe(std::string dataLine){
-    std::stringstream ss(dataLine);
-    std::string item;
-    while(std::getline(ss, item, ',')){
-        _data.push_back(std::make_shared<std::string>(item));
-    }
+    _data = splitSharedPtr(dataLine, '\t');
 }
 
 Dataframe::Dataframe(std::vector<std::shared_ptr<std::string>> data) {
@@ -17,6 +15,10 @@ Dataframe::Dataframe(std::vector<std::shared_ptr<std::string>> data) {
 
 Dataframe::~Dataframe(){
 
+}
+
+std::shared_ptr<std::string> Dataframe::get(int index) {
+    return _data.at(index);
 }
 
 
