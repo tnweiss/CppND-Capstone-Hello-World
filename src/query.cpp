@@ -25,11 +25,16 @@ Query::Query(int argc, char *argv[], Sources& sources){
     }
 }
 
-std::shared_ptr<Dataframe> Query::query(Dataframe dataframe, std::shared_ptr<Dataframe> results){
+ResultFrame Query::query(Dataframe dataframe){
     // if we find the equal operation then evaluate
-    if (strcmp(_where[1].c_str(), "=")) {
+    if (strcmp(_where[1].c_str(), "=") == 0) {
         // get the index of the key in the dataframe
         int index = _from->GetKeyIndex(_where[0]);
+        // if index is -1 then throw an error
+        if (index == -1) {
+            std::cout << "Key " << _where[0] << " not found" << std::endl;
+            exit(1);
+        }
         // compare the datafram value to the value in the query
         if( strcmp(dataframe.get(index)->c_str(),_where[2].c_str()) == 0){
             // if there is a match then get the selected data 
@@ -40,13 +45,13 @@ std::shared_ptr<Dataframe> Query::query(Dataframe dataframe, std::shared_ptr<Dat
                 selectData.push_back(dataframe.get(index)); 
             }
             // return the new subset of data
-            return std::shared_ptr<Dataframe>();
+            return ResultFrame(selectData, true);
         }
     // if no operator matches are found throw an error
-    }else {
+    } else {
         std::cout << "ERROR: Operation " << _where[1] << " not supported" << std::endl;
         exit(1);
     }
     // return null pointer
-    return nullptr;
+    return ResultFrame("", false);
 }

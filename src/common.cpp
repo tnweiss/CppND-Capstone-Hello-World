@@ -75,7 +75,7 @@ std::vector<std::string> listFilesInDirectory(std::string directory){
     std::vector<std::string> files;
 
     for (const auto & entry : std::filesystem::directory_iterator(directory)){
-        std::cout << entry.path() << std::endl;
+        std::cout << "file: " << entry.path() << std::endl;
         files.push_back(entry.path());
     }
 

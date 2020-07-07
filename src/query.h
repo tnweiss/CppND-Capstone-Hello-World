@@ -7,11 +7,12 @@
 
 #include "sources.h"
 #include "dataframe.h"
+#include "resultFrame.h"
 
 class Query {
     public:
         Query(int argc, char*[], Sources&);
-        std::shared_ptr<Dataframe> query(Dataframe dataframe, std::shared_ptr<Dataframe>);
+        ResultFrame query(Dataframe dataframe);
 
         friend std::ostream &operator<<(std::ostream & Str, const Query& q){
             Str << "SELECT ";

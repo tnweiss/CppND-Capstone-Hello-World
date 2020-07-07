@@ -4,6 +4,7 @@
 #include "sources.h"
 #include "query.h"
 #include "common.h"
+#include "engine.h"
 
 int main(int argc, char *argv[]) {
     // pretty print
@@ -38,9 +39,9 @@ int main(int argc, char *argv[]) {
     Query q(argc, argv, _sources);
     std::cout << "\nQUERY:\n" << q;
 
-    // TEST!!!!
-    // load data
-    
+    Engine engine(&q, listFilesInDirectory(dataDir));
+    engine.start();
+    engine.blockForResults();
 
     return 0;
 }
