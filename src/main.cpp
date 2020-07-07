@@ -35,11 +35,13 @@ int main(int argc, char *argv[]) {
     }
 
     //print the config file name for debugging and then load the sources config
-    std::cout << "Loading config file:\n" << configFile << std::endl;
+    std::cout << "Loading config file from: " << configFile << std::endl;
     Sources _sources(configFile);
 
-    std::cout << "\nData files in " << dataDir << ":\n" << std::endl;
+    std::cout << "\nLoading data from: " << dataDir << std::endl;
     listFilesInDirectory(dataDir);
+
+    std::cout << "\nUsing " << numThreads << " threads" << std::endl;
 
     // load the query object and print it out in a pretty format
     Query q(argc, argv, _sources);
@@ -48,11 +50,13 @@ int main(int argc, char *argv[]) {
     Engine engine(&q, listFilesInDirectory(dataDir));
     engine.start(numThreads);
     engine.blockForResults();
+    std::cout << "\nResults:" << std::endl << engine << std::endl;
 
+    // calculate the execution time
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-
-    std::cout << "\nQuery took " << duration << " milliseconds" << std::endl;
+    std::cout << "\nFound " << engine.resultsSize() << " results" << std::endl;
+    std::cout << "Execution Time: " << duration << " milliseconds" << std::endl << std::endl;
 
     return 0;
 }

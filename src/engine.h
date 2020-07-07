@@ -27,13 +27,17 @@ class ConcurrentList {
             std::lock_guard<std::mutex> lock(_mutex);
             _list.push_back(item);
         }
+        T at(int index){
+            return _list.at(index);
+        }
         T pop(){
             std::lock_guard<std::mutex> lock(_mutex);
             T item = _list.back();
             _list.pop_back();
             return item;
         }
-    
+        std::vector<T> get(){ return _list; }
+
     private:
         std::vector<T> _list;
         std::mutex _mutex;
@@ -46,7 +50,11 @@ class Engine {
         void blockForResults();
         void addResult(Dataframe);
         void executeQuery();
-        friend std::ostream &operator<<(std::ostream & Str, const Engine& e){
+        int resultsSize(){return _results.size();}
+        friend std::ostream &operator<<(std::ostream & Str, Engine& e){
+            for (Dataframe df : e._results.get()){
+                Str << df;
+            }
             return Str;
         }
 

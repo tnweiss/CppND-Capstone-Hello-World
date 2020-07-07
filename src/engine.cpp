@@ -31,7 +31,6 @@ void Engine::executeQuery(){
     while(!_files.empty()){
         // get the filename
         std::string filename = _files.pop();
-        std::cout << "Querying " << filename << std::endl;
         // initialize data to be used
         std::vector<Dataframe> data;
         // open the file and parse each line to a dataframe
@@ -42,7 +41,6 @@ void Engine::executeQuery(){
                 data.push_back(Dataframe(line));
             }
         }
-        std::cout << "Loaded " << data.size() << " dataframes" << std::endl;
         // pass each line to the query to get the dataframe matches
         for (Dataframe df: data) {
             ResultFrame result = _query->query(df);
@@ -50,8 +48,6 @@ void Engine::executeQuery(){
                 _results.push(result);
             }
         }
-        // add the data to the vector
-        std::cout << "Found " << _results.size() << " matches" << std::endl;
     }
 
 

@@ -30,9 +30,9 @@ Sources::Sources(std::string configFileName) {
                 }
                 // start the new source def
                 _source = std::make_unique<Source>(line.substr(3));
-            }
+            } 
             // if source is defined and line is not empty string add key
-            if (line.size() > 0 && _source != nullptr) {
+            else if (line.size() > 0 && _source != nullptr) {
                 _source->AddKey(line);
             }
         }

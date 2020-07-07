@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <iostream>
 
 class Dataframe {
     public:
@@ -15,7 +16,13 @@ class Dataframe {
         Dataframe(Dataframe &&); // move
         Dataframe &operator=(Dataframe&&); // move assignment
 
-        std::ostream &operator<<(std::ostream & Str); // used to print object to console
+        friend std::ostream &operator<<(std::ostream & Str, const Dataframe df){
+            for (std::shared_ptr<std::string> d: df._data){
+                Str << d.get()->data() << ", ";
+            }
+            Str << std::endl;
+            return Str;
+        }
         std::shared_ptr<std::string> get(int);
 
     private:

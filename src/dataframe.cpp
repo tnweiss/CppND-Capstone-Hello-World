@@ -49,11 +49,3 @@ Dataframe &Dataframe::operator=(Dataframe&& dataframe){
 
     return *this;
 } // move assignment
-
-std::ostream &Dataframe::operator<<(std::ostream & Str) {
-    for (std::shared_ptr<std::string> d: _data){
-        Str << d << ", ";
-    }
-    Str << std::endl;
-    return Str;
-}

@@ -42,7 +42,7 @@ ResultFrame Query::query(Dataframe dataframe){
             // for each data set add a pointer to the data to the data subset
             for (std::string str : _select){
                 int selectDataIndex = _from->GetKeyIndex(str);
-                selectData.push_back(dataframe.get(index)); 
+                selectData.push_back(dataframe.get(selectDataIndex)); 
             }
             // return the new subset of data
             return ResultFrame(selectData, true);
