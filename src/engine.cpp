@@ -12,8 +12,8 @@ Engine::Engine(Query *q, std::vector<std::string> files){
     }
 }
 
-void Engine::start(){
-    for (int i=0; i<1; i++) {
+void Engine::start(int numthreads){
+    for (int i=0; i<numthreads; i++) {
         _threads.emplace_back(std::thread(&Engine::executeQuery, this));
     }
 }

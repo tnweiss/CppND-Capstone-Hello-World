@@ -42,7 +42,7 @@ class ConcurrentList {
 class Engine {
     public:
         Engine(Query*, std::vector<std::string>);
-        void start();
+        void start(int);
         void blockForResults();
         void addResult(Dataframe);
         void executeQuery();
