@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.7)
 
+set(CMAKE_CXX_STANDARD 17)
 add_definitions(-std=c++17)
 
 set(CXX_FLAGS "-Wall")
@@ -15,3 +16,5 @@ add_executable(Query ${project_SRCS})
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 target_link_libraries(Query PRIVATE Threads::Threads)
+
+target_link_libraries(Query PRIVATE "stdc++fs")
