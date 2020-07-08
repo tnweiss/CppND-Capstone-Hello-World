@@ -52,6 +52,10 @@ class Engine {
         void executeQuery();
         int resultsSize(){return _results.size();}
         friend std::ostream &operator<<(std::ostream & Str, Engine& e){
+            for(std::string str: e._query->getSelect()){
+                Str << format(str, 20);
+            }
+            Str << std::endl;
             for (Dataframe df : e._results.get()){
                 Str << df;
             }

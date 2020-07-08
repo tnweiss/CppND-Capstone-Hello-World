@@ -6,6 +6,8 @@
 #include <memory>
 #include <iostream>
 
+#include "common.h"
+
 class Dataframe {
     public:
         Dataframe(std::string);
@@ -18,7 +20,7 @@ class Dataframe {
 
         friend std::ostream &operator<<(std::ostream & Str, const Dataframe df){
             for (std::shared_ptr<std::string> d: df._data){
-                Str << d.get()->data() << ", ";
+                Str << format(d.get()->data(), 20);
             }
             Str << std::endl;
             return Str;

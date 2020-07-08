@@ -14,4 +14,6 @@ std::vector<std::string> splitRValue(std::string, char);
 std::vector<std::string> parseWhere(std::string, char delim);
 
 std::vector<std::string> listFilesInDirectory(std::string);
+
+std::string format(std::string, int colSize);
 #endif

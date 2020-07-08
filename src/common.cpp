@@ -80,3 +80,14 @@ std::vector<std::string> listFilesInDirectory(std::string directory){
 
     return files;
 }
+
+std::string format(std::string str, int colSize){
+    if (str.length() > colSize)
+        return str;
+    
+    int numSpaces = colSize - str.length();
+    for(int i=0; i<numSpaces; i++)
+        str.append(" ");
+    
+    return str;
+}

@@ -5,9 +5,7 @@
 
 class ResultFrame: public Dataframe{
     public:
-        ResultFrame(std::vector<std::shared_ptr<std::string>> df, bool match): Dataframe(df) {
-            _match = match;
-        }
+        ResultFrame(std::vector<std::shared_ptr<std::string>> df, bool match): Dataframe(df), _match(match) {  }
         ResultFrame(std::string df, bool match): Dataframe(df) {
             _match = match;
         }

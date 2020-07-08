@@ -13,6 +13,7 @@ class Query {
     public:
         Query(int argc, char*[], Sources&);
         ResultFrame query(Dataframe dataframe);
+        std::vector<std::string> getSelect();
 
         friend std::ostream &operator<<(std::ostream & Str, const Query& q){
             Str << "SELECT ";

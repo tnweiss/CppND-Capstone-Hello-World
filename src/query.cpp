@@ -55,3 +55,7 @@ ResultFrame Query::query(Dataframe dataframe){
     // return null pointer
     return ResultFrame("", false);
 }
+
+std::vector<std::string> Query::getSelect(){
+    return _select;
+}
