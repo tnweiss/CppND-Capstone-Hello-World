@@ -17,21 +17,23 @@ class ConcurrentList {
         }
         ConcurrentList(){}
         bool empty(){
-            std::lock_guard<std::mutex> lock(_mutex);
+            std::unique_lock<std::mutex> uLock(_mutex);
             return _list.empty();
         }
         int size(){
             return _list.size();
         }
         void push(T item){
-            std::lock_guard<std::mutex> lock(_mutex);
+            std::unique_lock<std::mutex> uLock(_mutex);
             _list.push_back(item);
+            _cond.notify_one();
         }
         T at(int index){
             return _list.at(index);
         }
         T pop(){
-            std::lock_guard<std::mutex> lock(_mutex);
+            std::unique_lock<std::mutex> uLock(_mutex);
+            _cond.wait(uLock, [this] { return !_list.empty(); });
             T item = _list.back();
             _list.pop_back();
             return item;
@@ -41,6 +43,7 @@ class ConcurrentList {
     private:
         std::vector<T> _list;
         std::mutex _mutex;
+        std::condition_variable _cond;
 };
 
 class Engine {

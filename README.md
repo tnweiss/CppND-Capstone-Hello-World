@@ -79,8 +79,16 @@ SELECT GlobalEventID, Day, Actor1Name,
 FROM gdelt
 WHERE Day = 20190708
 
+Thread Summary:
+Thread 139938959652608 parsed 1394 lines in 153 milliseconds
+Thread 139938951259904 parsed 1423 lines in 133 milliseconds
+Thread 139938942867200 parsed 1437 lines in 156 milliseconds
+
 Results:
 GlobalEventID       Day                 Actor1Name          
+933643473           20190708                                
+933643474           20190708            CHN                 
+933643475           20190708            SLB                 
 933645588           20190708                                
 933645589           20190708            CHN                 
 933645590           20190708            CVL                 
@@ -102,26 +110,23 @@ GlobalEventID       Day                 Actor1Name
 933645606           20190708            USA                 
 933645607           20190708            USA                 
 933645608           20190708            USA                 
-933643473           20190708                                
-933643474           20190708            CHN                 
-933643475           20190708            SLB                 
 
 
 Found 24 results
-Execution Time: 124 milliseconds
+Execution Time: 158 milliseconds
 ```
 ## Rubric
 
 ### Loops, Functions, I/O
 
-- The project demonstrates an understanding of C++ functions and control structures. <b>File: common.cpp Line: 84 </b>
-- The project reads data from a file and process the data, or the program writes data to a file. <b>File: engine.cpp Line: 33 </b>
+- The project demonstrates an understanding of C++ functions and control structures. <b>File: common.cpp Line: 85 </b>
+- The project reads data from a file and process the data, or the program writes data to a file. <b>File: engine.cpp Line: 50 </b>
 - The project accepts user input and processes the input. <b>File: main.cpp Line: 25 </b>
 
 ### Object Oriented Programming
 
 - The project uses Object Oriented Programming techniques. <b>File: dataframe.cpp dataframe.h </b>
-- Classes use appropriate access specifiers for class members. <b>File: dataframe.h Line: 12 & 30 </b>
+- Classes use appropriate access specifiers for class members. <b>File: dataframe.h Line: 12 & 31 & 34 </b>
 - Class constructors utilize member initialization lists.  <b>File: resultFrame.h Line: 8 </b>
 - Classes abstract implementation details from their interfaces. <b>File: query.cpp Line: 28 </b>
 - Classes encapsulate behavior. <b>File: engine.h Line: 53 </b>
@@ -132,16 +137,16 @@ Execution Time: 124 milliseconds
 
 ### Memory Management
 
-- The project makes use of references in function declarations. <b>File: dataframe.h Line: 14 31</b>
-- The project uses destructors appropriately. <b> File: query.cpp Line: 63 </b>
+- The project makes use of references in function declarations. <b>File: dataframe.h Line: 14 32</b>
+- The project uses destructors appropriately. <b> File: dataframe.cpp Line: 19 </b>
 - The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate. <b>File: dataframe.cpp Line: 9</b>
 - The project follows the Rule of 5. <b>File: dataframe.h</b>
 - The project uses move semantics to move data, instead of copying it, where possible. <b>File: source.cpp Line: 40</b>
-- The project uses smart pointers instead of raw pointers. <b>File: dataframe.h Line: 31</b>
+- The project uses smart pointers instead of raw pointers. <b>File: dataframe.h Line: 35</b>
 
 ### Concurrency
 
-- The project uses multithreading. <b>File: engine.cpp Line: 15</b>
-- A promise and future is used in the project. <b> N/A </b>
-- A mutex or lock is used in the project <b>File: engine.h Line: 43</b>
-- A condition variable is used in the project. <b> N/A </b>
+- The project uses multithreading. <b>File: engine.cpp Line: 19</b>
+- A promise and future is used in the project. <b>File: engine.cpp Line: 19</b>
+- A mutex or lock is used in the project <b>File: engine.h Line: 27</b>
+- A condition variable is used in the project. <b> File: engine.h Line: 36 & 46 </b>
