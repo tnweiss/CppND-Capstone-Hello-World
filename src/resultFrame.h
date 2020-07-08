@@ -12,6 +12,7 @@ class ResultFrame: public Dataframe{
         bool foundMatch() {
             return _match;
         }
+        std::string toString(){return "ResultSet: " + *_id;}
     
     private:
         bool _match;

@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iostream>
 #include <filesystem>
+#include <thread>
 
 std::string trimEdges(std::string str) {
     bool doneFront = false, doneBack = false;
@@ -90,4 +91,23 @@ std::string format(std::string str, int colSize){
         str.append(" ");
     
     return str;
+}
+
+std::string gen_random(const int len) {
+    std::string str;
+    static const char alphanum[] =
+        "0123456789"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz";
+
+    for (int i = 0; i < len; ++i) {
+        str.append(alphanum[rand() % (sizeof(alphanum) - 1)] + "");
+    }
+    return str;
+}
+
+std::string thread_id_string() {
+    std::stringstream ss;
+    ss << std::this_thread::get_id();
+    return ss.str();
 }

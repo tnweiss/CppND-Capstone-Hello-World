@@ -47,9 +47,7 @@ class Engine {
     public:
         Engine(Query*, std::vector<std::string>);
         void start(int);
-        void blockForResults();
-        void addResult(Dataframe);
-        void executeQuery();
+        void executeQuery(std::promise<std::string> &&);
         int resultsSize(){return _results.size();}
         friend std::ostream &operator<<(std::ostream & Str, Engine& e){
             for(std::string str: e._query->getSelect()){
@@ -65,7 +63,6 @@ class Engine {
     private:
         Query *_query;
         ConcurrentList<std::string> _files;
-        std::vector<std::thread> _threads;
         ConcurrentList<Dataframe> _results;
 };
 

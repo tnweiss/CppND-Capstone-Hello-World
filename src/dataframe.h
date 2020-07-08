@@ -17,6 +17,7 @@ class Dataframe {
         Dataframe operator=(const Dataframe&); //copy assignment
         Dataframe(Dataframe &&); // move
         Dataframe &operator=(Dataframe&&); // move assignment
+        virtual std::string toString(){return "Dataframe: " + *_id;}
 
         friend std::ostream &operator<<(std::ostream & Str, const Dataframe df){
             for (std::shared_ptr<std::string> d: df._data){
@@ -27,8 +28,12 @@ class Dataframe {
         }
         std::shared_ptr<std::string> get(int);
 
+    protected:
+        std::string *_id;
+
     private:
         std::vector<std::shared_ptr<std::string>> _data;
+        
 };
 
 #endif

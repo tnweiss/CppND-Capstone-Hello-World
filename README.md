@@ -127,13 +127,13 @@ Execution Time: 124 milliseconds
 - Classes encapsulate behavior. <b>File: engine.h Line: 53 </b>
 - Classes follow an appropriate inheritance hierarchy. <b>File: resultFrame.h dataframe.h </b>
 - Overloaded functions allow the same function to operate on different parameters. <b> file: dataframe.h Line: 13 & 14 </b>
-- Derived class functions override virtual base class functions. <b> N/A </b>
+- Derived class functions override virtual base class functions. <b> Dataframe.h:20 & resultFrame.h:15 </b>
 - Templates generalize functions in the project. <b>File: engine.h Line: 13 </b>
 
 ### Memory Management
 
 - The project makes use of references in function declarations. <b>File: dataframe.h Line: 14 31</b>
-- The project uses destructors appropriately. <b> N/A </b>
+- The project uses destructors appropriately. <b> File: query.cpp Line: 63 </b>
 - The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate. <b>File: dataframe.cpp Line: 9</b>
 - The project follows the Rule of 5. <b>File: dataframe.h</b>
 - The project uses move semantics to move data, instead of copying it, where possible. <b>File: source.cpp Line: 40</b>

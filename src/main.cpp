@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 
     Engine engine(&q, listFilesInDirectory(dataDir));
     engine.start(numThreads);
-    engine.blockForResults();
+    //engine.blockForResults();
     std::cout << "\nResults:" << std::endl << engine << std::endl;
 
     // calculate the execution time

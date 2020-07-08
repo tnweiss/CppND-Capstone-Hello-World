@@ -16,4 +16,8 @@ std::vector<std::string> parseWhere(std::string, char delim);
 std::vector<std::string> listFilesInDirectory(std::string);
 
 std::string format(std::string, int colSize);
+
+std::string gen_random(const int);
+
+std::string thread_id_string();
 #endif
